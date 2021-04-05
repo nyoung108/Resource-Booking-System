@@ -1,2 +1,2 @@
-Room: 5|Email: lkgj@.com|Start Time: 2021-04-30T03:00|Finish Time: 2021-12-14T14:30
-Room: 5|Email: lki@df.com|Start Time: 2021-02-12T12:00|Finish Time: 2021-12-12T12:00
+
+Room: 5 |Email: @.com |Start Time: 2021-02-12T12:00 |Finish Time: 2021-12-12T12:00

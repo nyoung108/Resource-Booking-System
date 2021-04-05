@@ -12,6 +12,7 @@ public class Resource_booking_system {
     private static ArrayList<equipment> neededEquipment = new ArrayList<>();
     private static ArrayList<room> roomBooked = new ArrayList<>();
     private static ArrayList<String> textItems = new ArrayList<>();
+    private static ArrayList<String> availableRooms = new ArrayList<>();
 
     public static String fullDirCatering;
     public static String fullDirEquipment;
@@ -88,15 +89,24 @@ public class Resource_booking_system {
     public static void bookRoom() throws IOException {
         Scanner input = new Scanner(System.in);
         int roomNumber = roomNumber();
+        while(roomNumber==0){
+            return;
+        }
+        boolean valid = true;
+        while(true){
+        System.out.println("Start time of meeting: ");
         LocalDateTime startTime = requestedTime(roomNumber);
+        System.out.println("End  time of meeting: ");
         LocalDateTime finishTime = requestedTime(roomNumber);
         String email = emailCheck();
-        email = emailDuplicate(email, startTime, finishTime);
-                
+        valid = emailDuplicate(email, startTime, finishTime);
         
-
+        
+        if(valid = false){
         room newRoom = new room(roomNumber, email, startTime, finishTime);
+        
         roomBooked.add(newRoom);
+        
         if (roomNumber == 1) {
             fileHandling.writeRoom1File(fullDirRoom1, roomBooked);
         }
@@ -112,8 +122,9 @@ public class Resource_booking_system {
         if (roomNumber == 5) {
             fileHandling.writeRoom5File(fullDirRoom5, roomBooked);
         }
+        }
     }
-
+    }
     public static void requestCatering() throws IOException {
         Scanner input = new Scanner(System.in);
 
@@ -209,64 +220,65 @@ public class Resource_booking_system {
         int[] available = new int[5];
         System.out.println("If you require disabled access enter yes");
         String disabled = input.next();
-        if (!disabled.equalsIgnoreCase("yes")) {
-            if (people > 2) {
-                if (people > 4) {
-                    if (people > 8) {
-                        if (people > 15) {
-                            if (people > 50) {
-                                System.out.println("There are no rooms available for this size");
-                                return 0;
-                            }
-                            System.out.println("Available room: 5");
-                            available[4] = 5;
-                            
-                        }
-                        System.out.println("Available room: 4");
-                        available[3] = 4;
-                        available[4] = 5;
-                    }
-                    System.out.println("Available room: 3");
-                    available[2] = 3;
-                    available[3] = 4;
-                    available[4] = 5;
-                }
-                System.out.println("Available room: 2");
-                available[1] = 2;
-                available[2] = 3;
-                available[3] = 4;
-                available[4] = 5;
+        if (disabled.equalsIgnoreCase("yes")) {
+            if(people<=15){
+            System.out.println("Available rooms: 4");            
+            return 4;}
+            if(people>15){
+                System.out.println("No available rooms");
+                return 0;
             }
-            System.out.println("Available room: 1");
-
-            available[0] = 1;
-            available[1] = 2;
-            available[2] = 3;
-            available[3] = 4;
-            available[4] = 5;
-        } else {
-            System.out.println("Available rooms: 4");
-            available[3] = 4;
         }
-        int roomNumber = 0;
+        else if(people>50){
+            System.out.println("No available rooms");
+            return 0;
+        }
+        else if(people>15){
+            System.out.println("Available rooms: 5");
+            return 5;
+        }
+        else if(people>8){
+            System.out.println("Available rooms: 4, 5");
+            availableRooms.add("4");
+            availableRooms.add("5");
+        }
+        else if(people>4){
+            System.out.println("Available rooms: 3, 4, 5");
+            availableRooms.add("3");
+            availableRooms.add("4");
+            availableRooms.add("5");
+        }
+        else if(people>2){
+            System.out.println("Available rooms: 2, 3, 4, 5");
+            availableRooms.add("2");
+            availableRooms.add("3");
+            availableRooms.add("4");
+            availableRooms.add("5");
+        }
+        else {
+            System.out.println("Available rooms: 1, 2, 3, 4, 5");
+            availableRooms.add("1");
+            availableRooms.add("2");
+            availableRooms.add("3");
+            availableRooms.add("4");
+            availableRooms.add("5");
+        }
         boolean valid = true;
-        while (valid) {
-            System.out.println("What room would you like to book");
-            roomNumber = input.nextInt();
-            for (int i = 0; i < available.length; i++) {                            //need to fix room 5 always bieng available 
-                
-                if (available[i]!=0 && available[i] == roomNumber-1) {
-                    System.out.println("This room is available");
-                    valid = false;
-                } 
-                
-                else {
+        while(valid){
+        System.out.println("What room would you like to book");
+        int roomNumber = input.nextInt();
+            for (int i = 0; i < availableRooms.size(); i++) {
+                if(Integer.parseInt(availableRooms.get(i))==roomNumber){
+                    availableRooms.clear();
+                    return roomNumber;
+                }
+                else{
                     System.out.println("This room is not available");
                 }
-                
             }
         }
-        return roomNumber;
+        availableRooms.clear();
+        return 0;
     }
 
     public static String emailCheck() {
@@ -325,15 +337,31 @@ public class Resource_booking_system {
         return null;
     }
 
-    public static String emailDuplicate(String email, LocalDateTime startTime, LocalDateTime finishTime) {
+    public static boolean emailDuplicate(String email, LocalDateTime startTime, LocalDateTime finishTime) {
         readingFile.readRoom1File(fullDirRoom1, textItems);
         readingFile.readRoom2File(fullDirRoom2, textItems);
         readingFile.readRoom3File(fullDirRoom3, textItems);
         readingFile.readRoom4File(fullDirRoom4, textItems);
         readingFile.readRoom5File(fullDirRoom5, textItems);
+        boolean valid = true;
         for (int i = 0; i < textItems.size(); i++) {
-            System.out.println(textItems.get(i));
+            String[] check = textItems.get(i).split(" ");
+            if(email.equals(check[3])){
+            LocalDateTime startTimeCheck = LocalDateTime.parse(check[6]);
+            LocalDateTime finishTimeCheck = LocalDateTime.parse(check[9]);
+            if(startTime.isAfter(startTimeCheck)&&startTime.isBefore(finishTimeCheck)){
+                System.out.println("You have already booked a room at this time");
+                return valid;
+            } else if(finishTime.isBefore(finishTimeCheck)&&finishTime.isAfter(startTimeCheck)){
+                System.out.println("You have already booked a room at this time");
+                return valid;
+            } else{
+                valid = false;
+                return valid;
+            }
+            }
+            
         }
-        return email;
+        return valid;
     }
 }

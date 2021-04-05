@@ -17,7 +17,7 @@ public class room {
     }
 
     public String toString() {
-        return "Room: " + roomNumber + " |Email: " + email + " |Start Time: " + startTime + " |Finish Time: " + finishTime;
+        return "Room: " + roomNumber +  " |Email: " + email + " " + startTime + " " + finishTime;
     }
 
     public int getRoomNumber() {

@@ -17,8 +17,8 @@ public class fileHandling {
 
             for (int i = 0; i < roomBooked.size(); i++) {
 
-                printToFile.println("Room: " + roomBooked.get(i).getRoomNumber() + "|Email: " + roomBooked.get(i).getEmail() + "|Start Time: " + roomBooked.get(i).getStartTime()
-                        + "|Finish Time: " + roomBooked.get(i).getFinishTime());
+                printToFile.println("Room: " + roomBooked.get(i).getRoomNumber() + " |Email: " + roomBooked.get(i).getEmail() + " |Start Time: " + roomBooked.get(i).getStartTime()
+                        + " |Finish Time: " + roomBooked.get(i).getFinishTime());
             }
             printToFile.close();
             writeToFile.close();
@@ -39,8 +39,8 @@ public class fileHandling {
 
             for (int i = 0; i < roomBooked.size(); i++) {
 
-                printToFile.println("Room: " + roomBooked.get(i).getRoomNumber() + "|Email: " + roomBooked.get(i).getEmail() + "|Start Time: " + roomBooked.get(i).getStartTime()
-                        + "|Finish Time: " + roomBooked.get(i).getFinishTime());
+                printToFile.println("Room: " + roomBooked.get(i).getRoomNumber() + " |Email: " + roomBooked.get(i).getEmail() + " |Start Time: " + roomBooked.get(i).getStartTime()
+                        + " |Finish Time: " + roomBooked.get(i).getFinishTime());
             }
             printToFile.close();
             writeToFile.close();
@@ -61,8 +61,8 @@ public class fileHandling {
 
             for (int i = 0; i < roomBooked.size(); i++) {
 
-                printToFile.println("Room: " + roomBooked.get(i).getRoomNumber() + "|Email: " + roomBooked.get(i).getEmail() + "|Start Time: " + roomBooked.get(i).getStartTime()
-                        + "|Finish Time: " + roomBooked.get(i).getFinishTime());
+                printToFile.println("Room: " + roomBooked.get(i).getRoomNumber() + " |Email: " + roomBooked.get(i).getEmail() + " |Start Time: " + roomBooked.get(i).getStartTime()
+                        + " |Finish Time: " + roomBooked.get(i).getFinishTime());
             }
             printToFile.close();
             writeToFile.close();
@@ -83,8 +83,8 @@ public class fileHandling {
 
             for (int i = 0; i < roomBooked.size(); i++) {
 
-                printToFile.println("Room: " + roomBooked.get(i).getRoomNumber() + "|Email: " + roomBooked.get(i).getEmail() + "|Start Time: " + roomBooked.get(i).getStartTime()
-                        + "|Finish Time: " + roomBooked.get(i).getFinishTime());
+                printToFile.println("Room: " + roomBooked.get(i).getRoomNumber() + " |Email: " + roomBooked.get(i).getEmail() + "| Start Time: " + roomBooked.get(i).getStartTime()
+                        + " |Finish Time: " + roomBooked.get(i).getFinishTime());
             }
             printToFile.close();
             writeToFile.close();
@@ -105,8 +105,8 @@ public class fileHandling {
 
             for (int i = 0; i < roomBooked.size(); i++) {
 
-                printToFile.println("Room: " + roomBooked.get(i).getRoomNumber() + "|Email: " + roomBooked.get(i).getEmail() + "|Start Time: " + roomBooked.get(i).getStartTime()
-                        + "|Finish Time: " + roomBooked.get(i).getFinishTime());
+                printToFile.println("Room: " + roomBooked.get(i).getRoomNumber() + " |Email: " + roomBooked.get(i).getEmail() + " |Start Time: " + roomBooked.get(i).getStartTime()
+                        + " |Finish Time: " + roomBooked.get(i).getFinishTime());
             }
             printToFile.close();
             writeToFile.close();
